@@ -377,12 +377,16 @@ static void on_response_get_sms_params(TelHandle *handle, int result, void *data
 		if (resp_buf->count) {
 			resp.RecordIndex = resp_buf->params->index;
 			resp.TpValidityPeriod = resp_buf->params->vp;
+
+			dbg("SCA number [%s] len [%d]", resp_buf->params->sca.number,
+				strlen(resp_buf->params->sca.number));
+
 			if (resp_buf->params->sca.number[0] != '\0') {
 				resp.TpSvcCntrAddr.Npi = resp_buf->params->sca.npi;
 				resp.TpSvcCntrAddr.Ton = resp_buf->params->sca.ton;
 				if (__sms_asciistring_to_hex((const char *)resp_buf->params->sca.number,
 						(unsigned char *)resp.TpSvcCntrAddr.szDiallingNum,
-						sizeof(resp_buf->params->sca.number),
+						strlen(resp_buf->params->sca.number),
 						(unsigned char *)&resp.TpSvcCntrAddr.DialNumLen) != TRUE) {
 					err("sca received is null");
 					goto failure;
