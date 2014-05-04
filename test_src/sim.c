@@ -88,12 +88,13 @@ static char data_sim_transmit_apdu_apdu[MENU_DATA_SIZE +1] = {};
 
 static int _sim_str_to_hex(char a)
 {
-	int ret;
+	int ret = -1;
 
 	if (a >= '0' && a <= '9')
 		ret = a - '0';
 	else if (a >= 'a' && a <= 'f')
 		ret = a - 'a' + 10;
+
 	return ret;
 }
 
