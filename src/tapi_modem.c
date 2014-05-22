@@ -267,7 +267,6 @@ EXPORT_API char *tel_get_misc_me_imei_sync(TapiHandle *handle)
 	ret = tapi_modem_get_imei((TelHandle *)handle, imei);
 	if (ret != TEL_RETURN_SUCCESS) {
 		err("Operation Failed");
-		g_free(imei);
 		return NULL;
 	}
 
